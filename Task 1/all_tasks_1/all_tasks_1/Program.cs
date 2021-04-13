@@ -1,128 +1,283 @@
 ﻿using System;
-                        //Sorry to send tasks too late :(
-                        //I won't be anymore to miss deadline  
-namespace all_tasks_1 {
+using System.Collections.Generic;
 
-    class MainClass {
+namespace all_tasks_1
+{
 
-        public static void one() { //RECTANGLE
-            int a, b;
+    class MainClass
+    {
+        public static void Main(string[] args)
+        {
+            Console.Write("Enter the number of task: ");
+            switch (Console.ReadLine())
+            {
+                case "1":
+                    {
+                        One();
+                        break;
+                    }
+                case "2":
+                    {
+                        Two();
+                        break;
+                    }
+                case "3":
+                    {
+                        Three();
+                        break;
+                    }
+                case "4":
+                    {
+                        Four();
+                        break;
+                    }
+                case "5":
+                    {
+                        Five();
+                        break;
+                    }
+                case "6":
+                    {
+                        Six();
+                        break;
+                    }
+                case "7":
+                    {
+                        Seven();
+                        break;
+                    }
+                case "8":
+                    {
+                        Eight();
+                        break;
+                    }
+                case "9":
+                    {
+                        Nine();
+                        break;
+                    }
+                case "10":
+                    {
+                        Ten();
+                        break;
+                    }
+
+                default:
+                    Console.WriteLine("Incorrect input");
+                    break;
+
+            }
+        }
+
+        public static void One()
+        { //RECTANGLE
             Console.Write("a = ");
-            a = Convert.ToInt32(Console.ReadLine());
-            Console.Write("b = ");
-            b = Convert.ToInt32(Console.ReadLine());
-            if ((a <= 0) || (b <= 0)) {
+            if (!int.TryParse(Console.ReadLine(), out int a) || a < 0)
+            {
                 Console.WriteLine("Incorrect input");
+                return;
             }
-            else {
-                Console.WriteLine(a * b);
+            Console.Write("b = ");
+            if (!int.TryParse(Console.ReadLine(), out int b) || b < 0)
+            {
+                Console.WriteLine("Incorrect input");
+                return;
             }
+            Console.WriteLine(a * b);
         }
 
-        public static void two() { //TRIANGLE
-            int n;
-            Console.Write("n = ");
-            n = Convert.ToInt32(Console.ReadLine());
-            for (int i = 0; i < n; i++) {
-                for (int j = 0; j <= i; j++) {
-                    Console.Write("*");
+        public static void Two()
+        { //TRIANGLE
+            Console.Write("triangle size = ");
+            if (!int.TryParse(Console.ReadLine(), out int n) || n <= 0)
+            {
+                Console.WriteLine("Incorrect input");
+                return;
+            }
+
+            string star = "*";
+            for (int i = 0; i < n; i++)
+            {
+                for (int j = 0; j <= i; j++)
+                {
+                    Console.Write(star);
                 }
                 Console.WriteLine();
             }
         }
 
-        public static void three() { //ANOTHER TRIANGLE
-            int n;
-            Console.Write("n = ");
-            n = Convert.ToInt32(Console.ReadLine());
-            for (int i = 0; i < n; i++) {
-                for (int k = 0; k < n - i - 1; k++) {
-                    Console.Write(" ");
+        public static void Three()
+        { //ANOTHER TRIANGLE
+            Console.Write("triangle size = ");
+            if (!int.TryParse(Console.ReadLine(), out int n) || n <= 0)
+            {
+                Console.WriteLine("Incorrect input");
+                return;
+            }
+
+            string star = "*", space = " ";
+            for (int i = 0; i < n; i++)
+            {
+                for (int k = 0; k < n - i; k++)
+                {
+                    Console.Write(space);
                 }
-                for (int j = 0; j < 2 * i + 1; j++) {
-                    Console.Write("*");
+                for (int j = -1; j < 2 * i; j++)
+                {
+                    Console.Write(star);
                 }
-                for (int k = 0; k < n - i - 1; k++) {
-                    Console.Write(" ");
+                for (int k = 0; k < n - i; k++)
+                {
+                    Console.Write(space);
                 }
                 Console.WriteLine();
             }
         }
 
-        public static void four() { //X-MAS TREE
-            int n;
+        public static void Four()
+        { //X-MAS TREE
             Console.Write("n = ");
-            n = Convert.ToInt32(Console.ReadLine());
-            for (int t = 1; t < n + 1; t++) {
-                for (int i = 0; i < t; i++) {
-                    for (int k = 0; k < n - i - 1; k++) {
-                        Console.Write(" ");
+            if (!int.TryParse(Console.ReadLine(), out int n) || n <= 0)
+            {
+                Console.WriteLine("Incorrect input");
+                return;
+            }
+            string star = "*", space = " ";
+            for (int t = 1; t < n + 1; t++)
+            {
+                for (int i = 0; i < t; i++)
+                {
+                    for (int k = 0; k <= n - i; k++)
+                    {
+                        Console.Write(space);
                     }
-                    for (int j = 0; j < 2 * i + 1; j++) {
-                        Console.Write("*");
+                    for (int j = -1; j < 2 * i; j++)
+                    {
+                        Console.Write(star);
                     }
-                    for (int k = 0; k < n - i - 1; k++) {
-                        Console.Write(" ");
+                    for (int k = 0; k <= n - i; k++)
+                    {
+                        Console.Write(space);
                     }
                     Console.WriteLine();
                 }
             }
         }
 
-        public static void five() { //SUM OF NUMBERS
-            int n = 1000, sum = 0;
-            for (int i = 3; i < n; i++) {
-                if ((i % 3 == 0) || (i % 5 == 0)) {
-                    sum += i;
-                }
-            }
-            Console.WriteLine(sum);
+        public static void Five()
+        { //SUM OF NUMBERS
+            // 1 + 2 + ... + n = n * (n + 1) / 2
+
+            // кол-во чисел кратных x до 1000 = 999/x
+
+            // сумма кратных трем до 1000:
+            // 3 + 6 + 9 + ... + 999 = 3 * (1 + 2 + 3 + ... + 333) = 
+
+
+            Console.WriteLine((3 * (999 / 3 * (999 / 3 + 1)) / 2) +
+                              (5 * (999 / 5 * (999 / 5 + 1)) / 2) -
+                              (15 * (999 / 15 * (999 / 15 + 1)) / 2));
         }
 
-        //public static void six() { //FONT ADJUSTMENT
-        //    string s;
-            
-        //    Console.WriteLine("Enter the sentence:");
-        //    s = Console.ReadLine();
-        //    Console.WriteLine("Enter the sentence:");
-        //    switch (Console.ReadLine()) {
-        //        case "bold":
-        //            Console.WriteLine();
-        //            break;
-        //        case "italic":
 
-        //            break;
-        //        case "underline":
+        [Flags]
+        enum Mark
+        {
+            //None = 0b_000_0000, // 11
+            //Bold = 0b_000_0011, // 3
+            //Italic = 0b_000_0101, // 5
+            //Underline = 0b_000_0111 // 7
+            None,
+            Bold = 1,
+            Italic = 10,
+            Underline = 100
 
-        //            break;
-        //        default:
-        //            break;
-        //    }
-        //}
 
-        public static void seven() { //ARRAY PROCESSING
-            int n, p, max = Int32.MinValue, min = Int32.MaxValue;
+        }
+        public static void Six()
+        { //FONT ADJUSTMENT
+            Mark mark = Mark.None;
+            while (true)
+            {
+                Console.Clear();
+                Console.WriteLine($"Your marks: {mark}");
+                Console.WriteLine($"Choose mark");
+                Console.WriteLine($"1 - {(Mark)1}");
+                Console.WriteLine($"2 - {(Mark)10}");
+                Console.WriteLine($"3 - {(Mark)100}");
+
+                Console.WriteLine("Enter the mark:");
+                if (!int.TryParse(Console.ReadLine(), out int Enter) || Enter < 0)
+                {
+                    Console.WriteLine("Incorrect input");
+                    return;
+                }
+
+                switch (Enter)
+                {
+                    case 1:
+                        if ((int)mark % 10 == 1)
+                            mark -= 1;
+                        else
+                            mark += 1;
+
+                        break;
+                    case 2:
+                        if ((int)mark / 10 % 10 == 1)
+                            mark -= 10;
+                        else
+                            mark += 10;
+
+                        break;
+                    case 3:
+                        if ((int)mark / 100 == 1)
+                            mark -= 100;
+                        else
+                            mark += 100;
+
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+
+
+        public static void Seven()
+        { //ARRAY PROCESSING
             Random val = new Random();
             Console.Write("n = ");
-            n = Convert.ToInt32(Console.ReadLine());
+            if (!int.TryParse(Console.ReadLine(), out int n) || n <= 0)
+            {
+                Console.WriteLine("Incorrect input");
+                return;
+            }
             int[] a = new int[n];
-            for (int i = 0; i < n; i++) {
+            for (int i = 0; i < n; i++)
+            {
                 a[i] = val.Next(-10, 10);
                 Console.Write($"{a[i]} ");
             }
 
-            for (int i = 0; i < n; i++) {
-                if (a[i] > max) {
+            int p, max = a[0], min = a[0];
+            for (int i = 1; i < n; i++)
+            {
+                if (a[i] > max)
+                {
                     max = a[i];
                 }
-                if (a[i] < min) {
+                if (a[i] < min)
+                {
                     min = a[i];
                 }
             }
-
-            for (int i = 0; i < n - 1; i++) { //сортировка пузырьком
-                for (int j = n - 1; j > i; j--) {
-                    if (a[j - 1] > a[j]) {
+            
+            for (int i = 0; i < n - 1; i++)
+            { //сортировка пузырьком
+                for (int j = n - 1; j > i; j--)
+                {
+                    if (a[j - 1] > a[j])
+                    {
                         p = a[j - 1];
                         a[j - 1] = a[j];
                         a[j] = p;
@@ -130,33 +285,52 @@ namespace all_tasks_1 {
                 }
             }
 
-            Console.WriteLine($"\nmax = {max}");
+            Console.WriteLine(Environment.NewLine);
+            Console.WriteLine($"max = {max}");
             Console.WriteLine($"min = {min}");
-            for (int i = 0; i < n; i++) {
+            Console.WriteLine();
+            for (int i = 0; i < n; i++)
+            {
                 Console.Write($"{a[i]} ");
             }
 
 
         }
 
-        public static void eight() { //NO POSITIVE
-            int n, m, v;
+        public static void Eight()
+        { //NO POSITIVE
             Random val = new Random();
-            Console.Write("n = ");
-            n = Convert.ToInt32(Console.ReadLine());
-            Console.Write("m = ");
-            m = Convert.ToInt32(Console.ReadLine());
-            Console.Write("v = ");
-            v = Convert.ToInt32(Console.ReadLine());
+            Console.Write("first dimension of array = ");
+            if (!int.TryParse(Console.ReadLine(), out int n) || n <= 0)
+            {
+                Console.WriteLine("Incorrect input");
+                return;
+            }
+            Console.Write("second dimention of array = ");
+            if (!int.TryParse(Console.ReadLine(), out int m) || m <= 0)
+            {
+                Console.WriteLine("Incorrect input");
+                return;
+            }
+            Console.Write("third dimention of array = ");
+            if (!int.TryParse(Console.ReadLine(), out int v) || v <= 0)
+            {
+                Console.WriteLine("Incorrect input");
+                return;
+            }
             Console.WriteLine();
 
             int[,,] a = new int[n, m, v];
-            for (int i = 0; i < n; i++) {
-                for (int j = 0; j < m; j++) {
-                    for (int k = 0; k < v; k++) {
+            for (int i = 0; i < n; i++)
+            {
+                for (int j = 0; j < m; j++)
+                {
+                    for (int k = 0; k < v; k++)
+                    {
                         a[i, j, k] = val.Next(-10, 10);
                         Console.Write($"{a[i, j, k]} ");
-                        if (a[i, j, k] > 0) {
+                        if (a[i, j, k] > 0)
+                        {
                             a[i, j, k] = 0;
                         }
                     }
@@ -166,9 +340,12 @@ namespace all_tasks_1 {
             }
 
             Console.WriteLine("No positive array: ");
-            for (int i = 0; i < n; i++) {
-                for (int j = 0; j < m; j++) {
-                    for (int k = 0; k < v; k++) {
+            for (int i = 0; i < n; i++)
+            {
+                for (int j = 0; j < m; j++)
+                {
+                    for (int k = 0; k < v; k++)
+                    {
                         Console.Write($"{a[i, j, k]} ");
                     }
                     Console.WriteLine();
@@ -178,106 +355,79 @@ namespace all_tasks_1 {
 
         }
 
-        public static void nine() { //NON-NEGATINE SUM
-            int n, sum = 0;
+        public static void Nine()
+        { //NON-NEGATINE SUM
+            int sum = 0;
             Random val = new Random();
             Console.Write("n = ");
-            n = Convert.ToInt32(Console.ReadLine());
+            if (!int.TryParse(Console.ReadLine(), out int n) || n <= 0)
+            {
+                Console.WriteLine("Incorrect input");
+                return;
+            }
 
             int[] a = new int[n];
-            for (int i = 0; i < n; i++) {
+            for (int i = 0; i < n; i++)
+            {
                 a[i] = val.Next(-10, 10);
                 Console.Write($"{a[i]} ");
-                if (a[i] >= 0) {
+                if (a[i] >= 0)
+                {
                     sum += a[i];
                 }
             }
-            Console.WriteLine($"\nSum of non-negative elements = {sum}");
+            Console.WriteLine();
+            Console.WriteLine($"Sum of non-negative elements = {sum}");
         }
 
-        public static void ten() { //2D ARRAY
-            int n, m, sum = 0;
+        public static void Ten()
+        { //2D ARRAY
+            int sum = 0;
             Random val = new Random();
-            Console.Write("n = ");
-            n = Convert.ToInt32(Console.ReadLine());
-            Console.Write("m = ");
-            m = Convert.ToInt32(Console.ReadLine());
+            Console.Write("first dimension of array = ");
+            if (!int.TryParse(Console.ReadLine(), out int n) || n <= 0)
+            {
+                Console.WriteLine("Incorrect input");
+                return;
+            }
+            Console.Write("second dimention of array = ");
+            if (!int.TryParse(Console.ReadLine(), out int m) || m <= 0)
+            {
+                Console.WriteLine("Incorrect input");
+                return;
+            }
 
             int[,] a = new int[n, m];
             Console.WriteLine("\nArray nxm:");
-            for (int i = 0; i < n; i++) {
-                for (int j = 0; j < m; j++) {
+            for (int i = 0; i < n; i++)
+            {
+                for (int j = 0; j < m; j++)
+                {
                     a[i, j] = val.Next(1, 10);
                     Console.Write($"{a[i, j]} ");
                 }
                 Console.WriteLine();
             }
- 
-            Console.WriteLine("\nArray nxm with only even elements:");
-            for (int i = 0; i < n; i++) {
-                for (int j = 0; j < m; j++) {
-                    if ((i + j) % 2 == 0) {
+            Console.WriteLine();
+            Console.WriteLine("Array nxm with only even elements:");
+            for (int i = 0; i < n; i++)
+            {
+                for (int j = 0; j < m; j++)
+                {
+                    if ((i + j) % 2 == 0)
+                    {
                         Console.Write($"{a[i, j]} ");
                         sum += a[i, j];
                     }
-                    else {
+                    else
+                    {
                         Console.Write("0 ");
                     }
                 }
                 Console.WriteLine();
             }
-            Console.WriteLine($"\nSum of even elements: {sum}");
-        }
-
-
-        public static void Main(string[] args) {
-            Console.Write("Enter the number of task: ");
-            switch (Convert.ToInt32(Console.ReadLine())) {
-                case 1: {
-                        one();
-                        break;
-                    }
-                case 2: {
-                        two();
-                        break;
-                    }
-                case 3: {
-                        three();
-                        break;
-                    }
-                case 4: {
-                        four();
-                        break;
-                    }
-                case 5: {
-                        five();
-                        break;
-                    }
-                //case 6: {
-                //        six();
-                //        break;
-                //    }
-                case 7: {
-                        seven();
-                        break;
-                    }
-                case 8: {
-                        eight();
-                        break;
-                    }
-                case 9: {
-                        nine();
-                        break;
-                    }
-                case 10: {
-                        ten();
-                        break;
-                    }
-
-                default: Console.WriteLine("Incorrect input");
-                    break;
-
-            }
+            Console.WriteLine();
+            Console.WriteLine($"Sum of even elements: {sum}");
         }
     }
 }
