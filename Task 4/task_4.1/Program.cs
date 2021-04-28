@@ -14,6 +14,7 @@ namespace task_4
 
             while (isWork)
             {
+                Console.WriteLine();
                 Console.WriteLine("1. all files in directory");
                 Console.WriteLine("2. observation mode");
                 Console.WriteLine("3. rollback mode");
